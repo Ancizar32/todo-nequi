@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { CommonModule } from '@angular/common';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonButton, IonText } from '@ionic/angular/standalone';
+import { FeatureFlagsService } from '../core/services/feature-flags.service';
 
 @Component({
   selector: 'app-tab3',
+  standalone: true,
   templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent],
+  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonButton, IonText],
 })
 export class Tab3Page {
-  constructor() {}
+  constructor(public flags: FeatureFlagsService) {}
+
+  async refresh() {
+    await this.flags.refresh();
+  }
 }

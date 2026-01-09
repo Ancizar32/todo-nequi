@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ category ? 'Editar categoría' : 'Nueva categoría' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input formControlName="name" placeholder="Ej: Personal"></ion-input>
+    </ion-item>
+
+    <ion-text color="danger" *ngIf="form.controls.name.touched && form.controls.name.invalid">
+      <p style="margin: 6px 16px;">El nombre es obligatorio (mínimo 2 caracteres).</p>
+    </ion-text>
+
+    <ion-button expand="block" class="ion-margin-top" (click)="save()">Guardar</ion-button>
+  </form>
+</ion-content>

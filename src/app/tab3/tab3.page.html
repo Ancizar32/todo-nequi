@@ -1,17 +1,31 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Remote Config</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>
+      <h2>Feature flag: enableCategories</h2>
+      <p>Controla si se muestran categorías (Tab2 + filtros + selector).</p>
+    </ion-label>
+  </ion-item>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-item>
+    <ion-label>
+      Estado actual:
+      <strong>{{ flags.enableCategories ? 'ACTIVO' : 'INACTIVO' }}</strong>
+    </ion-label>
+  </ion-item>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="refresh()">
+    Refrescar Remote Config
+  </ion-button>
+
+  <ion-text>
+    <p class="ion-margin-top">
+      Prueba: cambia el parámetro en Firebase Remote Config, publícalo y pulsa “Refrescar”.
+    </p>
+  </ion-text>
 </ion-content>

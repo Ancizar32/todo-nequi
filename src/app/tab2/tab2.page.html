@@ -1,17 +1,37 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Categorías</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list *ngIf="categories.length > 0; else emptyState">
+    <ion-item-sliding *ngFor="let c of categories; trackBy: trackByCategoryId">
+      <ion-item button (click)="openEditCategoryModal(c)">
+        <ion-label>
+          <h2>{{ c.name }}</h2>
+        </ion-label>
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-item>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="confirmDelete(c)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ng-template #emptyState>
+    <div style="padding: 24px; text-align: center;">
+      <h2>No hay categorías</h2>
+      <p>Crea una categoría con el botón +</p>
+    </div>
+  </ng-template>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openNewCategoryModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
