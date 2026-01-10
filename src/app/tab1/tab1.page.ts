@@ -5,7 +5,10 @@ import {
   IonList, IonItem, IonLabel, IonCheckbox,
   IonFab, IonFabButton, IonIcon,
   IonItemSliding, IonItemOptions, IonItemOption,
-  IonSelect, IonSelectOption, IonButtons, IonButton,
+  IonButtons, IonButton,
+  IonSearchbar,
+  IonChip,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { ModalController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -26,20 +29,31 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['tab1.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
-    IonHeader, IonToolbar, IonTitle, IonContent,
-    IonList, IonItem, IonLabel, IonCheckbox,
-    IonFab, IonFabButton, IonIcon,
-    IonItemSliding, IonItemOptions, IonItemOption,
-    IonSelect, IonSelectOption, IonButtons, IonButton,
-  ],
+  CommonModule,
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonList, IonItem, IonLabel, IonCheckbox,
+  IonFab, IonFabButton, IonIcon,
+  IonItemSliding, IonItemOptions, IonItemOption,
+  IonButtons, IonButton,
+  IonSearchbar,
+  IonChip,
+  IonBadge,
+],
 })
 export class Tab1Page implements OnInit {
   tasks: Task[] = [];
   categories: Category[] = [];
   selectedCategoryId: string = '';
+  
 
-  constructor(
+  query: string = '';
+  filteredTasks: Task[] = [];
+
+  totalCount = 0;
+  pendingCount = 0;
+  doneCount = 0;
+
+   constructor(
     public flags: FeatureFlagsService,
     private tasksService: TasksService,
     private categoriesService: CategoriesService,
@@ -47,10 +61,6 @@ export class Tab1Page implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     addIcons({ add, trash });
-  }
-
-  async trackByTaskId(_: number, t: Task) {
-    return t.id;
   }
 
   async ngOnInit() {
@@ -66,6 +76,14 @@ export class Tab1Page implements OnInit {
       this.refreshTasks();
     });
   }
+  trackByTaskId(_: number, t: Task) {
+  return t.id;
+}
+
+  onSearch(ev: any) {
+    this.query = (ev?.detail?.value || '').toString();
+    this.applyFilters();
+  }
 
   onCategoryChange(value: string) {
     this.selectedCategoryId = value ?? '';
@@ -73,11 +91,38 @@ export class Tab1Page implements OnInit {
   }
 
   refreshTasks() {
-  const cat = this.selectedCategoryId || undefined;
-  // IMPORTANTE: crea SIEMPRE un array nuevo
-  this.tasks = [...this.tasksService.getByCategory(cat)];
-  this.cdr.markForCheck();
-}
+    const cat = this.selectedCategoryId || undefined;
+    this.tasks = [...this.tasksService.getByCategory(cat)];
+    this.applyFilters();
+  }
+
+  private applyFilters() {
+    const q = this.query.trim().toLowerCase();
+
+    const list = q
+      ? this.tasks.filter(t => (t.title || '').toLowerCase().includes(q))
+      : this.tasks;
+
+    this.filteredTasks = [...list];
+
+    this.totalCount = this.tasks.length;
+    this.doneCount = this.tasks.filter(t => !!t.done).length;
+    this.pendingCount = this.totalCount - this.doneCount;
+
+    this.cdr.markForCheck();
+  }
+
+  async toggleDone(task: Task) {
+    await this.tasksService.toggleDone(task.id);
+    // el observable refresca, pero igual:
+    this.cdr.markForCheck();
+  }
+
+  async deleteTask(task: Task, sliding?: IonItemSliding) {
+    await this.tasksService.delete(task.id);
+    this.cdr.markForCheck();
+    if (sliding) await sliding.close();
+  }
 
   async openNewTaskModal() {
     console.log('openNewTaskModal() click');
@@ -93,16 +138,8 @@ export class Tab1Page implements OnInit {
 
     if (role === 'save' && data?.title) {
       await this.tasksService.add(data.title, data.categoryId);
+      this.cdr.markForCheck();
     }
-  }
-
-  async toggleDone(task: Task) {
-    await this.tasksService.toggleDone(task.id);
-  }
-
-  async deleteTask(task: Task, sliding?: IonItemSliding) {
-    await this.tasksService.delete(task.id);
-    if (sliding) await sliding.close();
   }
 
   categoryName(categoryId?: string): string {

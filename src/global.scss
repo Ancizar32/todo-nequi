@@ -35,3 +35,156 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+.nequi-bg {
+  background: radial-gradient(900px 600px at 20% 10%, rgba(124,77,255,0.35), transparent 55%),
+              radial-gradient(900px 600px at 80% 0%, rgba(255,79,216,0.25), transparent 50%),
+              #0b0b10 !important;
+}
+
+.nequi-card {
+  background: var(--nequi-card) !important;
+  border: 1px solid var(--nequi-border);
+  border-radius: 18px !important;
+  box-shadow: var(--nequi-shadow);
+}
+
+.nequi-chip {
+  border-radius: 999px !important;
+  border: 1px solid var(--nequi-border);
+}
+
+.nequi-muted {
+  color: rgba(242,242,247,0.68) !important;
+}
+
+.nequi-badge {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  border: 1px solid var(--nequi-border);
+  background: rgba(255,255,255,0.06);
+}
+
+.nequi-title {
+  letter-spacing: 0.2px;
+  font-weight: 700;
+}
+
+ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+ion-content {
+  --background: transparent;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--nequi-border);
+}
+
+ion-searchbar {
+  --background: rgba(255,255,255,0.06);
+  --color: var(--ion-text-color);
+  --placeholder-color: rgba(242,242,247,0.55);
+  --icon-color: rgba(242,242,247,0.65);
+  border-radius: 14px;
+}
+
+html,
+body,
+ion-app {
+  background: transparent !important;
+}
+
+ion-content.nequi-bg {
+  --background: transparent !important;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(139, 92, 246, 0.22), transparent 60%),
+    radial-gradient(900px 500px at 90% 30%, rgba(59, 130, 246, 0.16), transparent 55%),
+    linear-gradient(180deg, #0e0b18, #07060b) !important;
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nequi-toolbar {
+  --background: transparent !important;
+  --border-color: transparent !important;
+}
+
+.nequi-title {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.page-pad { padding: 14px; }
+
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: linear-gradient(90deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+  border-radius: 18px;
+  padding: 14px;
+  backdrop-filter: blur(12px);
+  margin-bottom: 14px;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.muted { color: rgba(255, 255, 255, 0.62); font-size: 12px; }
+
+.h1 { color: rgba(255, 255, 255, 0.92); font-size: 18px; font-weight: 900; margin-top: 2px; }
+
+.desc { color: rgba(255, 255, 255, 0.62); font-size: 13px; margin-top: 10px; line-height: 1.35; }
+
+.meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+
+.pill {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.status-pill .dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.25); }
+
+.status-pill.on { border-color: rgba(34, 197, 94, 0.35); background: rgba(34, 197, 94, 0.12); }
+.status-pill.on .dot { background: rgba(34, 197, 94, 0.95); }
+
+.status-pill.off { border-color: rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.12); }
+.status-pill.off .dot { background: rgba(245, 158, 11, 0.95); }
+
+ion-button.nequi-btn {
+  --border-radius: 16px;
+  --background: #7c3aed;
+  --background-activated: #6d28d9;
+  --background-focused: #6d28d9;
+  --color: #fff;
+  font-weight: 900;
+}
+
+.hint { color: rgba(255, 255, 255, 0.62); font-size: 12.5px; padding: 8px 4px 0; }

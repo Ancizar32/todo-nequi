@@ -62,4 +62,15 @@ export class CategoriesService {
     await this.storage.set(KEY, list);
     this.categories$.next(list);
   }
+
+    // ✅ SEED: crea N categorías
+  async seedCategories(count = 50): Promise<void> {
+    for (let i = 1; i <= count; i++) {
+      await this.upsert(`Cat ${i}`);
+    }
+  }
+
+  getAll(): Category[] {
+    return [...this.categories$.value];
+  }
 }

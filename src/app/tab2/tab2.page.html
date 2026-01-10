@@ -1,37 +1,67 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Categorías</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="nequi-toolbar">
+    <ion-title class="nequi-title">Categorías</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar class="nequi-toolbar">
+    <ion-searchbar class="nequi-search" placeholder="Buscar categoría…" [value]="query" (ionInput)="onSearch($event)"
+      debounce="150">
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <ion-toolbar class="nequi-toolbar">
+    <div class="summary-row">
+      <div class="pill">Total: <b>{{ filteredCategories.length }}</b></div>
+      <div class="pill">Con tareas: <b>{{ withTasksCount }}</b></div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list *ngIf="categories.length > 0; else emptyState">
-    <ion-item-sliding *ngFor="let c of categories; trackBy: trackByCategoryId">
-      <ion-item button (click)="openEditCategoryModal(c)">
-        <ion-label>
-          <h2>{{ c.name }}</h2>
-        </ion-label>
-        <ion-icon slot="end" name="create"></ion-icon>
-      </ion-item>
+<ion-content class="nequi-bg">
+  <div class="page-pad">
 
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="confirmDelete(c)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+    <ion-list class="nequi-list" *ngIf="filteredCategories.length > 0; else emptyState">
+      <ion-item-sliding *ngFor="let c of filteredCategories; trackBy: trackByCategoryId">
+        <ion-item class="nequi-item" lines="none" button (click)="openEditCategoryModal(c)">
+          <div class="cat-icon" slot="start">
+            <ion-icon name="pricetag-outline"></ion-icon>
+          </div>
 
-  <ng-template #emptyState>
-    <div style="padding: 24px; text-align: center;">
-      <h2>No hay categorías</h2>
-      <p>Crea una categoría con el botón +</p>
-    </div>
-  </ng-template>
+          <ion-label>
+            <div class="cat-title">{{ c.name }}</div>
+            <div class="cat-sub">
+              {{ taskCount(c.id) }} tarea(s)
+            </div>
+          </ion-label>
 
+          <ion-badge class="cat-badge" [class.has-tasks]="taskCount(c.id) > 0">
+            {{ taskCount(c.id) }}
+          </ion-badge>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="secondary" (click)="openEditCategoryModal(c)">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="deleteCategory(c)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ng-template #emptyState>
+      <div class="empty-wrap">
+        <div class="empty-title">No hay categorías</div>
+        <div class="empty-sub">Crea tu primera categoría con el botón +</div>
+      </div>
+    </ng-template>
+
+  </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openNewCategoryModal()">
+    <ion-fab-button class="nequi-fab" (click)="openNewCategoryModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
 </ion-content>

@@ -1,31 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Remote Config</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="nequi-toolbar">
+    <ion-title class="nequi-title">Remote Config</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-label>
-      <h2>Feature flag: enableCategories</h2>
-      <p>Controla si se muestran categorías (Tab2 + filtros + selector).</p>
-    </ion-label>
-  </ion-item>
+<ion-content class="nequi-bg">
+  <div class="page-pad">
 
-  <ion-item>
-    <ion-label>
-      Estado actual:
-      <strong>{{ flags.enableCategories ? 'ACTIVO' : 'INACTIVO' }}</strong>
-    </ion-label>
-  </ion-item>
+    <div class="glass-card">
+      <div class="card-head">
+        <div>
+          <div class="muted">Feature flag</div>
+          <div class="h1">enableCategories</div>
+        </div>
 
-  <ion-button expand="block" class="ion-margin-top" (click)="refresh()">
-    Refrescar Remote Config
+        <div class="status-pill" [class.on]="flags.enableCategories" [class.off]="!flags.enableCategories">
+          <span class="dot"></span>
+          <span class="txt">{{ flags.enableCategories ? 'ACTIVO' : 'INACTIVO' }}</span>
+        </div>
+      </div>
+
+      <div class="desc">
+        Controla si se muestran categorías (tab Categorías + filtros + selector en tareas).
+      </div>
+
+      <div class="meta-row">
+        <div class="pill">Ambiente: <b>Firebase RC</b></div>
+        <div class="pill">Origen: <b>App</b></div>
+      </div>
+    </div>
+
+    <ion-button expand="block" class="nequi-btn" (click)="refresh()">
+      Refrescar Remote Config
+    </ion-button>
+    <div class="hint">
+      Tip: cambia el parámetro en Firebase Remote Config, publícalo y pulsa “Refrescar”.
+    </div>
+
+  </div>
+
+  <ion-button *ngIf="flags.enableDemoSeed" expand="block" color="medium" (click)="seedDemo()">
+    Cargar datos demo
   </ion-button>
-
-  <ion-text>
-    <p class="ion-margin-top">
-      Prueba: cambia el parámetro en Firebase Remote Config, publícalo y pulsa “Refrescar”.
-    </p>
-  </ion-text>
 </ion-content>

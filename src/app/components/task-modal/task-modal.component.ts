@@ -2,7 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular/standalone';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonButtons, IonButton,
+  IonItem, IonLabel, IonInput, IonText,
+  IonSelect, IonSelectOption,
+} from '@ionic/angular/standalone';
 import { Category } from '../../core/models/category.model';
 import { Task } from '../../core/models/task.model';
 import { FeatureFlagsService } from '../../core/services/feature-flags.service';
@@ -10,7 +15,12 @@ import { FeatureFlagsService } from '../../core/services/feature-flags.service';
 @Component({
   selector: 'app-task-modal',
   standalone: true,
-  imports: [CommonModule, IonicModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CommonModule,
+    ReactiveFormsModule,
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonButtons, IonButton,
+    IonItem, IonLabel, IonInput, IonText,
+    IonSelect, IonSelectOption,],
   templateUrl: './task-modal.component.html',
 })
 export class TaskModalComponent {

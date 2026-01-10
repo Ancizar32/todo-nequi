@@ -1,7 +1,8 @@
 {
   "name": "todo-nequi",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular-standalone"
 }

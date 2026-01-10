@@ -1,40 +1,56 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Tareas</ion-title>
-
-    <ion-buttons slot="end">
-      <ion-button (click)="openNewTaskModal()">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="nequi-toolbar">
+    <ion-title class="nequi-title">Mis tareas</ion-title>
   </ion-toolbar>
 
-  <ion-toolbar *ngIf="flags.enableCategories">
-    <ion-item lines="none">
-      <ion-label>Filtrar</ion-label>
-      <ion-select [value]="selectedCategoryId" (ionChange)="onCategoryChange($event.detail.value)" interface="popover"
-        placeholder="Todas">
-        <ion-select-option value="">Todas</ion-select-option>
-        <ion-select-option *ngFor="let c of categories" [value]="c.id">
-          {{ c.name }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+  <!-- Barra de búsqueda -->
+  <ion-toolbar class="nequi-toolbar">
+    <ion-searchbar class="nequi-search" placeholder="Buscar tarea…" [value]="query" (ionInput)="onSearch($event)"
+      debounce="150">
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <!-- Filtro categoría: chips (Nequi style) -->
+  <ion-toolbar *ngIf="flags.enableCategories" class="nequi-toolbar">
+    <div class="chip-scroll">
+      <div class="chip-row">
+        <ion-chip class="nequi-chip" [outline]="selectedCategoryId !== ''"
+          [color]="selectedCategoryId === '' ? 'primary' : undefined" (click)="onCategoryChange('')">
+          <ion-label>Todas</ion-label>
+        </ion-chip>
+
+        <ion-chip class="nequi-chip" *ngFor="let c of categories" [outline]="selectedCategoryId !== c.id"
+          [color]="selectedCategoryId === c.id ? 'primary' : undefined" (click)="onCategoryChange(c.id)">
+          <ion-label>{{ c.name }}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
+  </ion-toolbar>
+
+  <!-- Resumen -->
+  <ion-toolbar class="nequi-toolbar">
+    <div class="summary-row">
+      <div class="pill">Total: <b>{{ totalCount }}</b></div>
+      <div class="pill">Pendientes: <b>{{ pendingCount }}</b></div>
+      <div class="pill">Hechas: <b>{{ doneCount }}</b></div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list *ngIf="tasks.length > 0; else emptyState">
-    <ion-item-sliding *ngFor="let t of tasks; trackBy: trackByTaskId">
-      <ion-item>
-        <ion-checkbox slot="start" [checked]="t.done" (ionChange)="toggleDone(t)"></ion-checkbox>
+<ion-content class="nequi-bg">
+  <ion-list *ngIf="filteredTasks.length > 0; else emptyState" class="nequi-list">
+    <ion-item-sliding *ngFor="let t of filteredTasks; trackBy: trackByTaskId">
+      <ion-item class="nequi-item" lines="full">
+        <ion-checkbox slot="start" [checked]="t.done" (ionChange)="toggleDone(t)">
+        </ion-checkbox>
 
         <ion-label>
-          <h2 [style.text-decoration]="t.done ? 'line-through' : 'none'">
-            {{ t.title }}
-          </h2>
-          <p>{{ categoryName(t.categoryId) }}</p>
+          <h2 class="task-title" [class.done]="t.done">{{ t.title }}</h2>
+          <p class="task-sub">{{ categoryName(t.categoryId) }}</p>
         </ion-label>
+
+        <ion-badge *ngIf="t.done" color="success" class="status-badge">Hecha</ion-badge>
+        <ion-badge *ngIf="!t.done" color="warning" class="status-badge">Pendiente</ion-badge>
       </ion-item>
 
       <ion-item-options side="end">
@@ -46,14 +62,15 @@
   </ion-list>
 
   <ng-template #emptyState>
-    <div style="padding: 24px; text-align: center;">
-      <h2>No hay tareas</h2>
-      <p>Crea tu primera tarea con el botón +</p>
+    <div class="empty">
+      <div class="empty-title">No hay tareas</div>
+      <div class="empty-sub">Crea tu primera tarea con el botón +</div>
     </div>
   </ng-template>
 
+  <!-- FAB Nequi -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openNewTaskModal()">
+    <ion-fab-button class="nequi-fab" (click)="openNewTaskModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

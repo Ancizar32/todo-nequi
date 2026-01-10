@@ -23,6 +23,8 @@
               "browser": ""
             },
             "index": "src/index.html",
+            "baseHref": "./",
+            "deployUrl": "./",
             "polyfills": [
               "src/polyfills.ts"
             ],

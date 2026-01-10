@@ -1,3 +1,283 @@
 ion-fab {
   bottom: 72px; // sube el FAB por encima del tab bar
 }
+
+.nequi-toolbar {
+  --background: #0b0b10;
+  --color: #fff;
+}
+
+.nequi-title {
+  font-weight: 900;
+  letter-spacing: -0.3px;
+}
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  padding: 0 12px 10px 12px;
+}
+
+.summary-row {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  padding: 0 12px 10px 12px;
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+
+.nequi-list {
+  background: transparent;
+  padding: 10px 10px 120px;
+}
+
+.nequi-item {
+  --background: rgba(255, 255, 255, 0.06);
+  --color: #fff;
+  margin: 8px 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.task-title {
+  font-weight: 800;
+  margin: 0;
+}
+.task-title.done {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+.task-sub {
+  margin-top: 6px;
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.status-badge {
+  border-radius: 999px;
+}
+
+.empty {
+  padding: 28px;
+  text-align: center;
+  color: #fff;
+  opacity: 0.9;
+}
+.empty-title {
+  font-weight: 900;
+  font-size: 18px;
+}
+.empty-sub {
+  opacity: 0.7;
+  margin-top: 6px;
+}
+
+ion-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+ion-item {
+  --background: transparent;
+}
+
+ion-list {
+  background: transparent;
+}
+
+/* ===== Nequi Dark Header ===== */
+
+ion-header {
+  --background: transparent;
+}
+
+.nequi-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+  --min-height: 56px;
+
+  /* Degradé oscuro tipo Nequi */
+  background: linear-gradient(135deg,
+    #1f1b2e 0%,     /* morado muy oscuro */
+    #2b1f3f 45%,    /* morado Nequi */
+    #1e293b 100%    /* azul oscuro */
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
+
+  padding-left: 12px;
+  padding-right: 12px;
+
+  &:not(:first-child) {
+    margin-top: -1px;
+  }
+}
+
+/* ===== Título ===== */
+.nequi-title {
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  font-size: 20px;
+  color: #f5f5f7;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Searchbar Dark Glass ===== */
+.nequi-search {
+  --height: 44px;
+  --border-radius: 999px;
+
+  --background: rgba(255, 255, 255, 0.08);
+  --color: #f8fafc;
+  --placeholder-color: rgba(248, 250, 252, 0.65);
+  --icon-color: rgba(248, 250, 252, 0.75);
+  --clear-button-color: rgba(248, 250, 252, 0.8);
+
+  --box-shadow: 0 12px 22px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  margin: 8px 0 10px 0;
+}
+
+/* ===== Chips Categorías ===== */
+.chip-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 6px 0 10px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  ion-chip {
+    --background: rgba(255, 255, 255, 0.08);
+    --color: #f1f5f9;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    height: 34px;
+    padding: 0 12px;
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+
+    ion-label {
+      font-weight: 700;
+      font-size: 13px;
+    }
+  }
+
+  /* Chip activo */
+  ion-chip[color="primary"] {
+    --background: rgba(168, 85, 247, 0.85); /* violeta Nequi */
+    --color: #0f0f1a;
+    border: none;
+    box-shadow: 0 14px 28px rgba(168, 85, 247, 0.45);
+  }
+}
+
+/* ===== Resumen Pills ===== */
+.summary-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 0 12px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pill {
+    white-space: nowrap;
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: #f8fafc;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+
+    b {
+      font-weight: 900;
+    }
+  }
+}
+
+/* Contenedor scroll horizontal */
+.chip-scroll {
+  position: relative;
+  overflow: hidden; /* para recortar el fade */
+}
+
+/* La fila scrolleable */
+.chip-row {
+  display: flex;
+  gap: 10px;
+  padding: 8px 12px 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+}
+.chip-row::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Cada chip cae en “snap” */
+.chip-row ion-chip {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* Fade para indicar scroll (izq/der) */
+.chip-scroll::before,
+.chip-scroll::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 22px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chip-scroll::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,0));
+}
+
+.chip-scroll::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0,0,0,.35), rgba(0,0,0,0));
+}
+
+/* Opcional: chips más compactos para que no se “aplasten” */
+.nequi-chip {
+  height: 30px;
+  font-size: 12px;
+
+  ion-label {
+    padding: 0 2px;
+  }
+}
