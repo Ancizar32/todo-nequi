@@ -9,6 +9,7 @@
     </ion-searchbar>
   </ion-toolbar>
 
+  <!-- Resumen -->
   <ion-toolbar class="nequi-toolbar">
     <div class="summary-row">
       <div class="pill">Total: <b>{{ filteredCategories.length }}</b></div>
@@ -17,6 +18,7 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal -->
 <ion-content class="nequi-bg">
   <div class="page-pad">
 
@@ -58,6 +60,8 @@
     </ng-template>
 
   </div>
+
+  <!-- FAB Nequi -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="nequi-fab" (click)="openNewCategoryModal()">
       <ion-icon name="add"></ion-icon>

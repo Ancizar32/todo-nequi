@@ -80,22 +80,26 @@ export class Tab1Page implements OnInit {
   return t.id;
 }
 
+// funcion para manejar la busqueda
   onSearch(ev: any) {
     this.query = (ev?.detail?.value || '').toString();
     this.applyFilters();
   }
-
+  
+// funcion para manejar el cambio de categoria
   onCategoryChange(value: string) {
     this.selectedCategoryId = value ?? '';
     this.refreshTasks();
   }
 
+  // funcion para refrescar la lista de tareas
   refreshTasks() {
     const cat = this.selectedCategoryId || undefined;
     this.tasks = [...this.tasksService.getByCategory(cat)];
     this.applyFilters();
   }
 
+  // funcion para aplicar filtros
   private applyFilters() {
     const q = this.query.trim().toLowerCase();
 
@@ -112,18 +116,21 @@ export class Tab1Page implements OnInit {
     this.cdr.markForCheck();
   }
 
+  // funcion para alternar el estado de una tarea
   async toggleDone(task: Task) {
     await this.tasksService.toggleDone(task.id);
     // el observable refresca, pero igual:
     this.cdr.markForCheck();
   }
 
+  // funcion para eliminar tarea
   async deleteTask(task: Task, sliding?: IonItemSliding) {
     await this.tasksService.delete(task.id);
     this.cdr.markForCheck();
     if (sliding) await sliding.close();
   }
 
+  // funcion para abrir el modal de nueva tarea
   async openNewTaskModal() {
     console.log('openNewTaskModal() click');
     const modal = await this.modalCtrl.create({
@@ -142,6 +149,7 @@ export class Tab1Page implements OnInit {
     }
   }
 
+  // Funcion para obtener el nombre de la categoría
   categoryName(categoryId?: string): string {
     if (!categoryId) return 'Sin categoría';
     return this.categories.find(c => c.id === categoryId)?.name ?? 'Sin categoría';

@@ -17,10 +17,12 @@ export class Tab3Page {
     private categoriesService: CategoriesService,
   ) {}
 
+  // funcion para refrescar Remote Config
   async refresh() {
     await this.flags.refresh();
   }
 
+  // funcion para cargar datos demo
   async seedDemo() {
   await this.categoriesService.seedCategories(50);
   await this.tasksService.seedTasks(this.categoriesService.getAll(), 200);

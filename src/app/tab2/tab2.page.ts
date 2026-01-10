@@ -14,7 +14,6 @@ import { add, trashOutline, createOutline, pricetagOutline } from 'ionicons/icon
 import { CategoriesService } from '../core/services/categories.service';
 import { TasksService } from '../core/services/tasks.service';
 import { Category } from '../core/models/category.model';
-// ajusta el import de tu modal real:
 import { CategoryModalComponent } from '../components/category-modal/category-modal.component';
 
 @Component({
@@ -57,6 +56,7 @@ export class Tab2Page implements OnInit {
     return this.filteredCategories.filter(c => this.taskCount(c.id) > 0).length;
   }
 
+  // funcion para inicializar la pagina
   async ngOnInit() {
     await this.categoriesService.init();
     await this.tasksService.init();
@@ -78,6 +78,7 @@ export class Tab2Page implements OnInit {
     this.applyFilters();
   }
 
+  // funcion para aplicar filtros de busqueda
   private applyFilters() {
     const q = this.query.trim().toLowerCase();
     const base = !q
@@ -89,6 +90,7 @@ export class Tab2Page implements OnInit {
     this.cdr.markForCheck();
   }
 
+  // funcion para reconstruir el mapa de conteo de tareas
   private rebuildTaskMap(tasks: any[]) {
     const map = new Map<string, number>();
     for (const t of tasks || []) {
@@ -103,6 +105,7 @@ export class Tab2Page implements OnInit {
     return this.taskCountMap.get(key) ?? 0;
   }
 
+  // funcion para abrir modal de nueva categoria
   async openNewCategoryModal() {
     const modal = await this.modalCtrl.create({
       component: CategoryModalComponent,
@@ -117,6 +120,7 @@ export class Tab2Page implements OnInit {
     }
   }
 
+  // funcion para editar categoria
   async openEditCategoryModal(category: Category) {
     const modal = await this.modalCtrl.create({
       component: CategoryModalComponent,
@@ -131,6 +135,7 @@ export class Tab2Page implements OnInit {
     }
   }
 
+  // funcion para eliminar categoria
   async deleteCategory(category: Category) {
     await this.categoriesService.delete(category.id);
     this.cdr.markForCheck();

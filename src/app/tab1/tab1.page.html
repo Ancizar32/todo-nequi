@@ -37,6 +37,7 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal -->
 <ion-content class="nequi-bg">
   <ion-list *ngIf="filteredTasks.length > 0; else emptyState" class="nequi-list">
     <ion-item-sliding *ngFor="let t of filteredTasks; trackBy: trackByTaskId">
@@ -61,6 +62,7 @@
     </ion-item-sliding>
   </ion-list>
 
+  <!-- Estado vacío -->
   <ng-template #emptyState>
     <div class="empty">
       <div class="empty-title">No hay tareas</div>
