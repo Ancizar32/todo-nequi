@@ -83,17 +83,17 @@ Usado estratégicamente para mantener consistencia visual al trabajar con OnPush
 ---
 
 💾 Persistencia
-	•	Los datos se almacenan localmente usando Ionic Storage
-	•	El estado se mantiene entre reinicios de la app
+*	Los datos se almacenan localmente usando Ionic Storage
+*	El estado se mantiene entre reinicios de la app
 
 ---
 
 🔧 Requisitos
-	•	Node.js 22.x
-	•	Ionic CLI
-	•	Android Studio (para build Android)
-	•	Xcode (opcional, para iOS)
-	•	Cuenta de Firebase
+*	Node.js 22.x
+*	Ionic CLI
+*	Android Studio (para build Android)
+*	Xcode (opcional, para iOS)
+*	Cuenta de Firebase
 
 ---
 
@@ -106,16 +106,16 @@ ionic serve
 ---
 
 🔥 Configurar Firebase Remote Config
-	1.	Crear proyecto en Firebase
-	2.	Agregar una app Web
-	3.	Copiar la configuración en:
-	•	src/environments/environment.ts
-	•	src/environments/environment.prod.ts
-	4.	Crear el parámetro:
-	•	Nombre: enableCategories
-	•	Tipo: Boolean
-	•	Valor por defecto: true
-	5.	Publicar cambios y usar la pestaña Remote Config dentro de la app para refrescar.
+1.	Crear proyecto en Firebase
+2.	Agregar una app Web
+3.	Copiar la configuración en:
+	*	src/environments/environment.ts
+	*	src/environments/environment.prod.ts
+4.	Crear el parámetro:
+	*	Nombre: enableCategories
+	*	Tipo: Boolean
+	*	Valor por defecto: true
+5.	Publicar cambios y usar la pestaña Remote Config dentro de la app para refrescar.
 
 ---
 
