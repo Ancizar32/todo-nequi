@@ -122,8 +122,9 @@ ionic serve
 📦 Build Android (APK)
 
 ionic build
-npx cap sync android
-npx cap open android
+cordova platform add android
+cordova prepare android
+cordova build android
 
 En Android Studio:
 
@@ -132,14 +133,14 @@ Build > Build Bundle(s) / APK(s) > Build APK(s)
 
 ---
 
-🍎 Build iOS (opcional)
+🍎 Build iOS
 
 Requiere macOS + Xcode + cuenta de Apple Developer.
 
-ionic cap add ios
 ionic build
-npx cap sync ios
-npx cap open ios
+cordova platform add ios
+cordova prepare ios
+cordova build ios
 
 
 ---
