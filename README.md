@@ -120,13 +120,14 @@ ionic serve
 ---
 
 📦 Build Android (APK)
-
+```
 ionic build
 cordova platform add android
 cordova prepare android
 cordova build android
+```
 
-En Android Studio:
+En Android Studio:<br>
 
 Build > Build Bundle(s) / APK(s) > Build APK(s)
 
@@ -136,12 +137,12 @@ Build > Build Bundle(s) / APK(s) > Build APK(s)
 🍎 Build iOS
 
 Requiere macOS + Xcode + cuenta de Apple Developer.
-
+```
 ionic build
 cordova platform add ios
 cordova prepare ios
 cordova build ios
-
+```
 
 ---
 
